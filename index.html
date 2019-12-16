@@ -23,7 +23,6 @@
             <!--/one-->
             <div class="one">
                 <button id="btn" type="button">点位统计</button>
-                <!-- <button id="changePlace" type="button">改变区</button> -->
                 <div class="select_box">
                     <select name="selector" id="selector">
                     <option value="天河区">天河区</option>
@@ -839,7 +838,7 @@
             }, {
                 title: "中石化大厦",
                 detail: "广州市	天河区 体育西路191号",
-                yjzc_zb: "113.327408,23.084521",
+                yjzc_zb: "113.327273,23.146502",
                 image: 'zsh.png',
                 visitor_count: 50000,
                 equipment: 8
@@ -1250,7 +1249,6 @@
 
             var bdary = new BMap.Boundary();
             bdary.get(text, function(rs) { //获取行政区域
-                console.log('区域名', text);
                 map.clearOverlays(); //清除地图覆盖物
                 loadPointData($coordinateJson, {
                     "showDetails": false
