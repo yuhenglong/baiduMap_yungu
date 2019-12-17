@@ -331,30 +331,6 @@ select {
     margin-left: 10px;
 }
 
-#selector {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    width: 100px;
-    height: 26px;
-    border-color: #f3ab26;
-}
-
-#selector option {
-    min-height: 26px;
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    pointer-events: none;
-    order: 2;
-    z-index: 1;
-    box-sizing: border-box;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
 
 /*最小屏幕分辨率为1280px且最大为1440px*/
 
@@ -374,6 +350,28 @@ select {
     }
     .span-dis {
         display: none;
+    }
+    #selector {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 100px;
+        height: 26px;
+        border-color: #f3ab26;
+    }
+    #selector option {
+        min-height: 26px;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        pointer-events: none;
+        order: 2;
+        z-index: 1;
+        box-sizing: border-box;
+        overflow: hidden;
+        white-space: nowrap;
     }
 }
 
@@ -411,5 +409,29 @@ select {
     }
     .select_box {
         margin-left: 0.5rem;
+    }
+    #selector {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 6rem;
+        height: 1.5rem;
+        border-color: #f3ab26;
+    }
+    #selector option {
+        min-height: 1.5rem;
+        font-size: 0.8rem;
+        line-height: 1.5rem;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        pointer-events: none;
+        order: 2;
+        z-index: 1;
+        box-sizing: border-box;
+        overflow: hidden;
+        white-space: nowrap;
     }
 }
