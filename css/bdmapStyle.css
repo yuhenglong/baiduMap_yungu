@@ -372,26 +372,45 @@ select {
         font-weight: bold;
         padding: 0 15px;
     }
+    .span-dis {
+        display: none;
+    }
 }
 
 
 /*最小屏幕分辨率为200px且最大为800px*/
 
-@media (min-width: 200px) and (max-width:800px) {
+@media (min-width: 300px) and (max-width:470px) {
+    html,
+    body {
+        font-size: 16px;
+    }
     .map-search>.one {
         /* float:left;
 		margin-left:15px; */
         display: block;
         text-align: center;
-        margin: 10px auto;
+        margin: 0.3rem auto;
+        /* height: */
     }
     .map-search {
-        padding: 15px;
+        padding: 0.5rem;
     }
     .map-search .tit {
-        font-size: 16px;
-        line-height: 16px;
+        font-size: 1rem;
+        line-height: 1rem;
         font-weight: bold;
-        padding: 0 15px;
+        padding: 0 0.5rem;
+    }
+    .map-search>.one .coust {
+        display: none;
+    }
+    .span-dis {
+        display: inline-block;
+        font-size: 0.8rem;
+        line-height: 1rem;
+    }
+    .select_box {
+        margin-left: 0.5rem;
     }
 }

@@ -3,8 +3,8 @@
 	 * 百度API参考：http://lbsyun.baidu.com/index.php?title=jspopular
 	 * Demo示例演示：http://lbsyun.baidu.com/jsdemo.htm#c1_14
 	 * 百度地图坐标拾取/经纬度获取：http://api.map.baidu.com/lbsapi/getpoint/index.html
-	 * Author : ChenHairui
-	 * Date   : 2018.8.25
+	 * Author : yuhenglong
+	 * Date   : 2019.07.28
 	 */
 
 
@@ -25,6 +25,8 @@
 		copyright 自定义地图版权信息.
 	*/
 	function BDMapInit(map, json) {
+	    // 获取屏幕尺寸并判断是否移动端
+	    const isPCequipt = document.body.clientWidth > 450;
 	    //=====初始化
 
 	    var isNumc = 1, //中心点依据
@@ -65,13 +67,15 @@
 	    map.addControl(mapType2); //左上角，默认地图控件
 	    map.setCurrentCity(defaultCity); //由于有3D图，需要设置城市哦
 	    map.addControl(overView); //添加默认缩略地图控件
-	    map.addControl(overViewOpen); //右下角地图缩略图，打开
+	    // map.addControl(overViewOpen); //右下角地图缩略图，打开
 
-	    //=====添加第3方版权信息
-	    var cr = new BMap.CopyrightControl({ anchor: BMAP_ANCHOR_TOP_RIGHT }); //设置版权控件位置
-	    map.addControl(cr); //添加版权控件
-	    var bs = map.getBounds(); //返回地图可视区域
-	    cr.addCopyright({ id: 1, content: '<a class="b_copyright">' + copyright + '</a>', bounds: bs });
+	    //=====添加日期信息，只在PC端设置
+	    if (isPCequipt) {
+	        var cr = new BMap.CopyrightControl({ anchor: BMAP_ANCHOR_TOP_RIGHT }); //设置版权控件位置
+	        map.addControl(cr); //添加版权控件
+	        var bs = map.getBounds(); //返回地图可视区域
+	        cr.addCopyright({ id: 1, content: '<a class="b_copyright">' + copyright + '</a>', bounds: bs });
+	    }
 
 	    //=====城市切换
 	    map.enableContinuousZoom();
@@ -109,6 +113,8 @@
 	 * showDetails 是否默认就显示标注点详细信息 值 true或false（默认true)
 	 */
 	function createMapPoint(dataJson, paramJson) {
+	    // 获取屏幕尺寸并判断是否移动端
+	    const isPCequipt = document.body.clientWidth > 450;
 
 	    var l_point = dataJson.l_point,
 	        r_point = dataJson.r_point,
@@ -203,8 +209,8 @@
 
 	    //..设置标注点信息窗
 	    if (isInfo) {
-	        var $infoJson = { "point": point, "title": title, "description": description, "image": image, "visitor_count": visitor_count, "equipment": equipment }
-	        createMapInfoWindow(marker, $infoJson);
+	        var $infoJson = { "point": point, "title": title, "description": description, "image": image, "visitor_count": visitor_count, "equipment": equipment };
+	        createMapInfoWindow(marker, $infoJson, isPCequipt);
 	    }
 
 	}
@@ -263,7 +269,7 @@
 	 * @param marker 标注对象
 	 * @param json 信息窗内数据组成的json
 	 */
-	function createMapInfoWindow(marker, json) {
+	function createMapInfoWindow(marker, json, isPCequipt) {
 	    var title = json.title,
 	        description = json.description,
 	        image = json.image,
@@ -283,13 +289,27 @@
 	        //"title" : title //信息窗标题文字，支持HTML内容
 	        "title": title
 	    }
+
+	    // 恒隆start
 	    var infoWindow = new BMap.InfoWindow(content, infoOptions); // 创建信息窗口对象 
-	    marker.addEventListener("click", function(e) { //mouseover鼠标经过时,click鼠标点击时
-	        //var p = e.target.getPosition();
-	        //alert("标注点的位置是" + p.lng + "," + p.lat); 
-	        //var point = new BMap.Point(p.lng, p.lat);  //标注点坐标
-	        map.openInfoWindow(infoWindow, point); //开启信息窗口
-	    });
+	    if (isPCequipt) {
+	        marker.addEventListener("mouseover", function(e) { //mouseover鼠标经过时,click鼠标点击时
+	            map.openInfoWindow(infoWindow, point); //开启信息窗口
+	        });
+	    } else {
+	        marker.addEventListener("click", function(e) { //mouseover鼠标经过时,click鼠标点击时
+	            map.openInfoWindow(infoWindow, point); //开启信息窗口
+	        });
+	    }
+	    // 恒隆end
+	    // 原始代码
+	    // var infoWindow = new BMap.InfoWindow(content, infoOptions); // 创建信息窗口对象 
+	    // marker.addEventListener("click", function(e) { //mouseover鼠标经过时,click鼠标点击时
+	    //     //var p = e.target.getPosition();
+	    //     //alert("标注点的位置是" + p.lng + "," + p.lat); 
+	    //     //var point = new BMap.Point(p.lng, p.lat);  //标注点坐标
+	    //     map.openInfoWindow(infoWindow, point); //开启信息窗口
+	    // });
 	}
 
 
