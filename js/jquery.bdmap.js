@@ -284,7 +284,7 @@
 	        "title": title
 	    }
 	    var infoWindow = new BMap.InfoWindow(content, infoOptions); // 创建信息窗口对象 
-	    marker.addEventListener("mouseover", function(e) { //mouseover鼠标经过时,click鼠标点击时
+	    marker.addEventListener("click", function(e) { //mouseover鼠标经过时,click鼠标点击时
 	        //var p = e.target.getPosition();
 	        //alert("标注点的位置是" + p.lng + "," + p.lat); 
 	        //var point = new BMap.Point(p.lng, p.lat);  //标注点坐标
