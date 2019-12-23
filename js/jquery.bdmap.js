@@ -278,26 +278,41 @@
 	        equipment = json.equipment;
 	    // 定义拼接弹窗内容
 	    var content = '<div class="bdInfoWindow">' + "<img src='./img/" + image + "'>" + "<p>介绍：" + description + " </p>" + "<p>设备：" + equipment + " 台<p/>" + "<p>人流量：" + visitor_count + " 人次/天<p/>" + '</div>';
-
-	    var infoOptions = {
+	    // PC端
+	    var infoOptionsPc = {
+	            // 假如想修复BUG，就把宽度和高度设置为固定值
+	            "width": 550, //信息窗宽度(220-730) 0 自动调整
+	            "maxWidth": 500, //信息窗最大宽度(220-730)
+	            "height": 600, //信息窗高度(60-650) 0 自动调整
+	            "offset": { width: 15, height: -10 }, //信息窗位置偏移
+	            //"enableAutoPan":true, //是否开启信息窗口打开时地图自动移动（默认开启）
+	            //"title" : title //信息窗标题文字，支持HTML内容
+	            "title": title
+	        }
+	        // 移动端
+	    var infoOptionsPhone = {
 	        // 假如想修复BUG，就把宽度和高度设置为固定值
-	        "width": 550, //信息窗宽度(220-730) 0 自动调整
+	        "width": 250, //信息窗宽度(220-730) 0 自动调整
 	        "maxWidth": 500, //信息窗最大宽度(220-730)
-	        "height": 600, //信息窗高度(60-650) 0 自动调整
-	        "offset": { width: 15, height: -10 }, //信息窗位置偏移
+	        "height": 400, //信息窗高度(60-650) 0 自动调整
+	        "offset": { width: 5, height: -3 }, //信息窗位置偏移
 	        //"enableAutoPan":true, //是否开启信息窗口打开时地图自动移动（默认开启）
 	        //"title" : title //信息窗标题文字，支持HTML内容
 	        "title": title
 	    }
 
 	    // 恒隆start
-	    var infoWindow = new BMap.InfoWindow(content, infoOptions); // 创建信息窗口对象 
+
 	    if (isPCequipt) {
-	        marker.addEventListener("mouseover", function(e) { //mouseover鼠标经过时,click鼠标点击时
+	        // PC端
+	        var infoWindow = new BMap.InfoWindow(content, infoOptionsPc); // 创建PC端信息窗口对象 
+	        marker.addEventListener("mouseover", function() { //mouseover鼠标经过时,click鼠标点击时
 	            map.openInfoWindow(infoWindow, point); //开启信息窗口
 	        });
 	    } else {
-	        marker.addEventListener("click", function(e) { //mouseover鼠标经过时,click鼠标点击时
+	        // 移动端
+	        var infoWindow = new BMap.InfoWindow(content, infoOptionsPhone); // 创建PC端信息窗口对象 
+	        marker.addEventListener("click", function() { //mouseover鼠标经过时,click鼠标点击时
 	            map.openInfoWindow(infoWindow, point); //开启信息窗口
 	        });
 	    }
