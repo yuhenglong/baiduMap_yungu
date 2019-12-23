@@ -373,6 +373,18 @@ select {
         overflow: hidden;
         white-space: nowrap;
     }
+    .bdInfoWindow>img {
+        height: auto;
+        display: block;
+        margin: 0 auto 5px;
+        width: 350px;
+    }
+    .bdInfoWindow>p {
+        width: 500px;
+        font-size: 16px;
+        line-height: 20px;
+        margin: 10px 0;
+    }
 }
 
 
@@ -433,5 +445,17 @@ select {
         box-sizing: border-box;
         overflow: hidden;
         white-space: nowrap;
+    }
+    .bdInfoWindow>img {
+        height: auto;
+        display: block;
+        margin: 0 auto 0.3rem;
+        width: 100%;
+    }
+    .bdInfoWindow>p {
+        width: 100%;
+        font-size: 0.8rem;
+        line-height: 1rem;
+        margin: 0.5rem 0;
     }
 }

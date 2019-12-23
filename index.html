@@ -57,7 +57,7 @@
 
 </html>
 
-<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 <!--百度地图api-->
 <script type="text/javascript" src="js/jquery.bdmap.js"></script>
 <!--百度地图API模块化成函数供前台调用-->
@@ -172,33 +172,16 @@
     //*                                     分隔线                                                              *//
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $(function() {
-        // 获取点位的JSON文件(暂时不行)
-        // $.ajax({
-        //     url: './place.json',
-        //     type: "GET",
-        //     dataType: "json",
-        //     success: function(res) {
-        //         console.log(res);
-        //     }
-        // });
 
         var $coordinateJson = {
             data: [{
                 title: "云股传媒有限公司",
-                detail: "云股传媒，一家创新型公司，通过建立裸眼3D广告联网云投播平台，用科技为大家展现出三维视觉盛宴。&nbsp;在这个科技发展的时代，我们抓住发展的机遇，通过裸眼3D技术创新和模式创新，让受众感受到现代广告的真实感，&nbsp;让广告主更好的打造品牌，实现品牌的传播。给产品增强知名度并树立良好的品牌形象。让广告投放实现利益最大化。",
+                detail: "云股传媒，通过建立裸眼3D广告联网云投播平台，用科技为大家展现出三维视觉盛宴。通过裸眼3D技术创新和模式创新，让受众感受到现代广告的真实感，&nbsp;让广告主更好的打造品牌，实现品牌的传播。",
                 yjzc_zb: "113.341145,23.131629",
                 color: '2',
-                image: 'ygcm.jpg',
+                image: 'ygcm.png',
                 visitor_count: 20000,
                 equipment: 0
-            }, {
-                title: "广东农垦总局",
-                detail: "农垦",
-                yjzc_zb: "113.343037,23.158248",
-                color: '2',
-                image: 'nkzj.jpg',
-                visitor_count: 30000,
-                equipment: ''
             }, {
                 title: "番禺海印潮楼",
                 detail: "广东省广州市番禺区兴南大道445号环境大厦",
@@ -210,7 +193,7 @@
                 title: "广百广场（荔胜店）",
                 detail: "广州市荔湾区花地大道与龙溪大道交汇处",
                 yjzc_zb: "113.239795,23.083794",
-                image: 'ygcm.jpg',
+                image: 'ygcm.png',
                 visitor_count: 40000,
                 equipment: 8
             }, {
@@ -224,7 +207,7 @@
                 title: "嘉鼎创客写字楼",
                 detail: "广州市白云区彭江路168号",
                 yjzc_zb: "113.283069,23.234309",
-                image: 'ygcm.jpg',
+                image: 'ygcm.png',
                 visitor_count: 20000,
                 equipment: 1
             }, {
@@ -273,7 +256,7 @@
                 title: "东城广场",
                 detail: "广州市黄埔区黄埔东路1-9号东城广场一层",
                 yjzc_zb: "113.45569,23.106834",
-                image: 'ygcm.jpg',
+                image: 'ygcm.png',
                 visitor_count: 40000,
                 equipment: 8
             }, {
@@ -490,7 +473,7 @@
                 title: "骏亿外贸城",
                 detail: "广州市越秀区西湖路38号",
                 yjzc_zb: "113.273886,23.129593",
-                image: 'ygcm.jpg',
+                image: 'ygcm.png',
                 visitor_count: 40000,
                 equipment: 8
             }, {
@@ -511,7 +494,7 @@
                 title: "金德大厦",
                 detail: "广东省广州市越秀区文德路67号",
                 yjzc_zb: "113.278248,23.128841",
-                image: 'ygcm.jpg',
+                image: 'ygcm.png',
                 visitor_count: 50000,
                 equipment: 2
             }, {
@@ -581,7 +564,7 @@
                 title: "保利·中汇广场",
                 detail: "广东省广州市天河区林和西路157号",
                 yjzc_zb: "113.329918,23.154173",
-                image: 'ygcm.jpg',
+                image: 'ygcm.png',
                 visitor_count: 50000,
                 equipment: 8
             }, {
@@ -651,7 +634,7 @@
                 title: "佳兆业广场",
                 detail: "广州市天河区体育西路191号",
                 yjzc_zb: "113.327416,23.146169",
-                image: 'ygcm.jpg',
+                image: 'ygcm.png',
                 visitor_count: 50000,
                 equipment: 8
             }, {
@@ -1036,42 +1019,42 @@
                 title: "倾城大厦",
                 detail: "",
                 yjzc_zb: "113.267252,23.142282",
-                image: 'ygcm.jpg',
+                image: 'ygcm.png',
                 visitor_count: 30000,
                 equipment: 3
             }, {
                 title: "天鹿大厦",
                 detail: "",
                 yjzc_zb: "113.433025,23.20389",
-                image: 'ygcm.jpg',
+                image: 'ygcm.png',
                 visitor_count: 30000,
                 equipment: 4
             }, {
                 title: "保泰广场",
                 detail: "",
                 yjzc_zb: "113.459909,23.114445",
-                image: 'ygcm.jpg',
+                image: 'ygcm.png',
                 visitor_count: 30000,
                 equipment: 6
             }, {
                 title: "时代TIT",
                 detail: "",
                 yjzc_zb: "113.407155,23.126099",
-                image: 'ygcm.jpg',
+                image: 'ygcm.png',
                 visitor_count: 30000,
                 equipment: 5
             }, {
                 title: "世联空间(永泰店)",
                 detail: "",
                 yjzc_zb: "113.309966,23.222943",
-                image: 'ygcm.jpg',
+                image: 'ygcm.png',
                 visitor_count: 30000,
                 equipment: 3
             }, {
                 title: "南站未来域",
                 detail: "",
                 yjzc_zb: "113.316488,22.984344",
-                image: 'ygcm.jpg',
+                image: 'ygcm.png',
                 visitor_count: 30000,
                 equipment: 3
             }, {
@@ -1088,6 +1071,153 @@
                 image: 'pszk.png',
                 visitor_count: 40000,
                 equipment: 16
+            }, {
+                title: "美潮汇",
+                detail: "广州市	白云区 岗头大街40号",
+                yjzc_zb: "113.260427,23.159442",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "金山谷-一期",
+                detail: "广州市	番禺区 东艺路139号",
+                yjzc_zb: "113.349878,22.985553",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "金山谷-二期",
+                detail: "广州市	番禺区 东艺路139号",
+                yjzc_zb: "113.349986,22.983199",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "金山谷-三期",
+                detail: "广州市	番禺区 东艺路139号",
+                yjzc_zb: "113.352914,22.984871",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "奥园城市广场（洛溪）",
+                detail: "广州市	番禺区如意路2号",
+                yjzc_zb: "113.313348,23.047495",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "银华大厦",
+                detail: "广州市	海珠区 新港西路1号",
+                yjzc_zb: "113.290382,23.102109",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "萝岗奥园广场",
+                detail: "广州市	萝岗区 开创大道1942号",
+                yjzc_zb: "113.503982,23.179946",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "华鼎商务中心",
+                detail: "广州市	南海区 广佛一路48号之一",
+                yjzc_zb: "113.203661,23.119716",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "保利绿地大都汇",
+                detail: "广州市	南海区 金隆路35号",
+                yjzc_zb: "113.551489,22.801912",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "乐天创新港",
+                detail: "广州市	南海区 乐天黄阁大道128号",
+                yjzc_zb: "113.522881,22.832557",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "迎龙优创汇",
+                detail: "广州市	天河区 环村南街6-13号",
+                yjzc_zb: "113.373482,23.200531",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "中辰广场",
+                detail: "广州市	天河区 龙口西路1号",
+                yjzc_zb: "113.343458,23.139976",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "乐天创意园",
+                detail: "广州市	天河区广园路科华街251号",
+                yjzc_zb: "113.368718,23.152697",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "乐都汇",
+                detail: "广州市	天河区中山大道中1116号",
+                yjzc_zb: "113.426909,23.121964",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "金燕大厦",
+                detail: "广州市	天河区燕岭路120号",
+                yjzc_zb: "113.334063,23.164694",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "燕都商务大厦",
+                detail: "广州市	天河区粤垦路623号",
+                yjzc_zb: "113.333162,23.164124",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "汇德商业大厦",
+                detail: "广州市	天河区龙口大街6号",
+                yjzc_zb: "113.405231,23.129328",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "中宇广场",
+                detail: "广州市	天河区天河北路628号",
+                yjzc_zb: "113.348665,23.146657",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "凯蓝大厦",
+                detail: "广州市	天河区花城大道16号",
+                yjzc_zb: "113.323161,23.125146",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "轻出大厦",
+                detail: "广州市	越秀区德政南路50号",
+                yjzc_zb: "113.282219,23.124297",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
+            }, {
+                title: "国际银行中心",
+                detail: "广州市	越秀区东风西路191号",
+                yjzc_zb: "113.261197,23.13906",
+                image: 'pszk.png',
+                visitor_count: 0,
+                equipment: 0
             }]
         }
 
