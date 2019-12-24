@@ -22,7 +22,7 @@
             </div>
             <!--/one-->
             <div class="one">
-                <button id="btn" type="button" class="coust">点位统计</button>
+                <button id="btn" type="button" class="coust" style="display:none;">点位统计</button>
                 <span class="span-dis">切换区域：</span>
                 <div class="select_box">
                     <select name="selector" id="selector">
@@ -57,7 +57,7 @@
 
 </html>
 
-<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
 <!--百度地图api-->
 <script type="text/javascript" src="js/jquery.bdmap.js"></script>
 <!--百度地图API模块化成函数供前台调用-->
@@ -106,7 +106,8 @@
     // 关闭地图默认PIO事件
     var map = new BMap.Map("allmap", {
         enableMapClick: false
-    }); //allmap为加载地图区域的ID
+    });
+    //allmap为加载地图区域的ID
     BDMapInit(map, {
         "isNumc": 1,
         "city": "广州",

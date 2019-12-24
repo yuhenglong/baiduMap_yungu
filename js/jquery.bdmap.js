@@ -30,7 +30,7 @@
 	    //=====初始化
 
 	    var isNumc = 1, //中心点依据
-	        defaultCity = '泉州', //中心点城市
+	        defaultCity = '广州', //中心点城市
 	        defaultPoint = '118.611836,24.918225', //中心点坐标
 	        defaultZoom = 15, //缩放级别 3-19
 	        copyright = ' '; //版权信息
@@ -46,6 +46,10 @@
 
 	    map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
 	    map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
+
+	    // 点聚合
+	    //最简单的用法，生成一个marker数组，然后调用markerClusterer类即可。
+	    // var markerClusterer = new BMapLib.MarkerClusterer(map, { markers: json.data });
 	    //map.disableDragging();     //禁止拖拽
 	    //map.enableDragging(); //允许拖拽(默认允许)
 
@@ -283,7 +287,7 @@
 	            // 假如想修复BUG，就把宽度和高度设置为固定值
 	            "width": 550, //信息窗宽度(220-730) 0 自动调整
 	            "maxWidth": 500, //信息窗最大宽度(220-730)
-	            "height": 600, //信息窗高度(60-650) 0 自动调整
+	            "height": 580, //信息窗高度(60-650) 0 自动调整
 	            "offset": { width: 15, height: -10 }, //信息窗位置偏移
 	            //"enableAutoPan":true, //是否开启信息窗口打开时地图自动移动（默认开启）
 	            //"title" : title //信息窗标题文字，支持HTML内容
