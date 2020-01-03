@@ -76,6 +76,10 @@
 <script type="text/javascript" src="js/bd/world.js"></script>
 <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=9eON9w7lfoGPM7dkhypB3Cw4E2zOWpAR"></script>
 <!-- <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script> -->
+<!-- 点聚合引入start -->
+<script type="text/javascript" src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+<!-- 点聚合引入end -->
 <script type="text/javascript" src="js/bd/bmap.min.js"></script>
 <!-- <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script> -->
 <script type="text/javascript">
@@ -106,8 +110,7 @@
     // 关闭地图默认PIO事件
     var map = new BMap.Map("allmap", {
         enableMapClick: false
-    });
-    //allmap为加载地图区域的ID
+    }); //allmap为加载地图区域的ID
     BDMapInit(map, {
         "isNumc": 1,
         "city": "广州",
@@ -116,14 +119,83 @@
         "copyright": date
     });
 
-
     /*+--------------------------------+*/
     /**
      * 函数：加载坐标json数据
      * @param json <=> json数据
      */
     function loadPointData(dataJson, paramJson) {
+        eachPoint(dataJson, paramJson);
 
+        // 监听缩放事件
+        map.addEventListener("zoomend", function(e) {
+            var ZoomNum = map.getZoom();
+            var markerClusterer;
+            if (ZoomNum < 15) {
+                console.log("清除了");
+                map.clearOverlays(); //一次移除所有的覆盖物(相当于清空所有标注点)(必须!)
+                // 点聚合start
+                var markers = [];
+                // 遍历得到的数据
+                $.each(dataJson.data, function(i, item) {
+                    const addressArr = dataJson.data[i].yjzc_zb.split(",");
+                    const obj_option = {};
+                    obj_option.image = dataJson.data[i].image;
+                    obj_option.title = dataJson.data[i].title;
+                    obj_option.detail = dataJson.data[i].detail;
+                    obj_option.equipment = dataJson.data[i].equipment;
+                    obj_option.visitor_count = dataJson.data[i].visitor_count;
+                    // 横纵坐标定点
+                    var point = new BMap.Point(addressArr[0], addressArr[1]);
+                    var marker = new BMap.Marker(point);
+
+                    // 添加点击事件
+                    addClickHandler(marker, dataJson, paramJson, point, obj_option);
+
+                    markers.push(marker);
+
+                });
+                // map.clearOverlays(); //清除地图覆盖物
+
+
+                // 添加点聚合效果
+                markerClusterer = new BMapLib.MarkerClusterer(map, {
+                    markers: markers
+                });
+                // 点聚合end
+            } else {
+                eachPoint(dataJson, paramJson);
+
+            }
+        })
+
+    }
+
+    function addClickHandler(marker, dataJson, paramJson, point, obj_option) {
+        marker.addEventListener("click", function(e) {
+            console.log('超级无敌大肥猪', marker);
+            // 创建并弹出弹窗
+            openWinInfo(marker, e, dataJson, paramJson, point, obj_option);
+        });
+    }
+    // 创建弹窗
+    function openWinInfo(marker, e, dataJson, paramJson, point, obj_option) {
+        console.log('传递的对象', obj_option);
+        var opts = {
+            width: 550,
+            height: 580,
+            enableMessage: true
+        };
+        var p = e.target;
+        var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+        // 创建信息窗口对象
+        var content = '<div class="bdInfoWindow">' + '<p>' + obj_option.title + "</p>" + "<img src='./img/" + obj_option.image + "'>" + "<p>介绍：" + obj_option.detail + " </p>" + "<p>设备：" + obj_option.equipment + " 台<p/>" + "<p>人流量：" + obj_option.visitor_count + " 人次/天<p/>" + '</div>';
+        var infoWindow = new BMap.InfoWindow(content, opts);
+        //开启信息窗口
+        map.openInfoWindow(infoWindow, point);
+    }
+
+    function eachPoint(dataJson, paramJson) {
         map.clearOverlays(); //一次移除所有的覆盖物(相当于清空所有标注点)(必须!)
 
         for (var i = 0; i < dataJson.data.length; i++) {
@@ -169,7 +241,6 @@
             createMapPoint($pointJson, paramJson);
 
         }
-
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1080,148 +1151,148 @@
                 detail: "广州市	白云区 岗头大街40号",
                 yjzc_zb: "113.260427,23.159442",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 20000,
+                equipment: 3
             }, {
                 title: "金山谷-一期",
                 detail: "广州市	番禺区 东艺路139号",
                 yjzc_zb: "113.349878,22.985553",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 30000,
+                equipment: 8
             }, {
                 title: "金山谷-二期",
                 detail: "广州市	番禺区 东艺路139号",
                 yjzc_zb: "113.349986,22.983199",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 30000,
+                equipment: 8
             }, {
                 title: "金山谷-三期",
                 detail: "广州市	番禺区 东艺路139号",
                 yjzc_zb: "113.352914,22.984871",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 30000,
+                equipment: 8
             }, {
                 title: "奥园城市广场（洛溪）",
                 detail: "广州市	番禺区如意路2号",
                 yjzc_zb: "113.313348,23.047495",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 35000,
+                equipment: 3
             }, {
                 title: "银华大厦",
                 detail: "广州市	海珠区 新港西路1号",
                 yjzc_zb: "113.290382,23.102109",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 30000,
+                equipment: 2
             }, {
                 title: "萝岗奥园广场",
                 detail: "广州市	萝岗区 开创大道1942号",
                 yjzc_zb: "113.503982,23.179946",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 40000,
+                equipment: 15
             }, {
                 title: "华鼎商务中心",
                 detail: "广州市	南海区 广佛一路48号之一",
                 yjzc_zb: "113.203661,23.119716",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 30000,
+                equipment: 6
             }, {
                 title: "保利绿地大都汇",
                 detail: "广州市	南海区 金隆路35号",
                 yjzc_zb: "113.551489,22.801912",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 30000,
+                equipment: 11
             }, {
                 title: "乐天创新港",
                 detail: "广州市	南海区 乐天黄阁大道128号",
                 yjzc_zb: "113.522881,22.832557",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 40000,
+                equipment: 17
             }, {
                 title: "迎龙优创汇",
                 detail: "广州市	天河区 环村南街6-13号",
                 yjzc_zb: "113.373482,23.200531",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 40000,
+                equipment: 2
             }, {
                 title: "中辰广场",
                 detail: "广州市	天河区 龙口西路1号",
                 yjzc_zb: "113.343458,23.139976",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 50000,
+                equipment: 7
             }, {
                 title: "乐天创意园",
                 detail: "广州市	天河区广园路科华街251号",
                 yjzc_zb: "113.368718,23.152697",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 40000,
+                equipment: 5
             }, {
                 title: "乐都汇",
                 detail: "广州市	天河区中山大道中1116号",
                 yjzc_zb: "113.426909,23.121964",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 40000,
+                equipment: 2
             }, {
                 title: "金燕大厦",
                 detail: "广州市	天河区燕岭路120号",
                 yjzc_zb: "113.334063,23.164694",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 40000,
+                equipment: 4
             }, {
                 title: "燕都商务大厦",
                 detail: "广州市	天河区粤垦路623号",
                 yjzc_zb: "113.333162,23.164124",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 40000,
+                equipment: 5
             }, {
                 title: "汇德商业大厦",
                 detail: "广州市	天河区龙口大街6号",
                 yjzc_zb: "113.405231,23.129328",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 40000,
+                equipment: 3
             }, {
                 title: "中宇广场",
                 detail: "广州市	天河区天河北路628号",
                 yjzc_zb: "113.348665,23.146657",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 50000,
+                equipment: 4
             }, {
                 title: "凯蓝大厦",
                 detail: "广州市	天河区花城大道16号",
                 yjzc_zb: "113.323161,23.125146",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 70000,
+                equipment: 2
             }, {
                 title: "轻出大厦",
                 detail: "广州市	越秀区德政南路50号",
                 yjzc_zb: "113.282219,23.124297",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 50000,
+                equipment: 1
             }, {
                 title: "国际银行中心",
                 detail: "广州市	越秀区东风西路191号",
                 yjzc_zb: "113.261197,23.13906",
                 image: 'pszk.png',
-                visitor_count: 0,
-                equipment: 0
+                visitor_count: 50000,
+                equipment: 8
             }]
         }
 
@@ -1380,7 +1451,7 @@
         })
         $("#selector").change(function() {
             const text = $("#selector").find("option:selected").val();
-            map.centerAndZoom(text, 15);
+            map.centerAndZoom(text, 16);
 
             var bdary = new BMap.Boundary();
             bdary.get(text, function(rs) { //获取行政区域
