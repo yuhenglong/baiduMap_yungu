@@ -132,7 +132,6 @@
             var ZoomNum = map.getZoom();
             var markerClusterer;
             if (ZoomNum < 15) {
-                console.log("清除了");
                 map.clearOverlays(); //一次移除所有的覆盖物(相当于清空所有标注点)(必须!)
                 // 点聚合start
                 var markers = [];
@@ -173,19 +172,29 @@
 
     function addClickHandler(marker, dataJson, paramJson, point, obj_option) {
         marker.addEventListener("click", function(e) {
-            console.log('超级无敌大肥猪', marker);
+
             // 创建并弹出弹窗
             openWinInfo(marker, e, dataJson, paramJson, point, obj_option);
         });
     }
     // 创建弹窗
     function openWinInfo(marker, e, dataJson, paramJson, point, obj_option) {
-        console.log('传递的对象', obj_option);
-        var opts = {
-            width: 550,
-            height: 580,
-            enableMessage: true
-        };
+        // 获取屏幕尺寸并判断是否移动端
+        const isPCequipt = document.body.clientWidth > 450;
+        if (isPCequipt) {
+            var opts = {
+                width: 550,
+                height: 580,
+                enableMessage: true
+            };
+        } else {
+            var opts = {
+                width: 250,
+                height: 400,
+                enableMessage: true
+            };
+        }
+
         var p = e.target;
         var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
         // 创建信息窗口对象
