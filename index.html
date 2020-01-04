@@ -21,11 +21,12 @@
                 <label class="tit">广州云股传媒广告投放点</label>
             </div>
             <!--/one-->
-            <div class="one">
+            <div class="one" style="display:none;">
                 <button id="btn" type="button" class="coust" style="display:none;">点位统计</button>
-                <span class="span-dis">切换区域：</span>
-                <div class="select_box">
+                <span class="span-dis" style="display:none;">切换区域：</span>
+                <div class="select_box" style="display:none;">
                     <select name="selector" id="selector">
+                    <option value="all">全部</option>
                     <option value="天河区">天河区</option>
                     <option value="越秀区">越秀区</option>
                     <option value="荔湾区">荔湾区</option>
@@ -128,10 +129,11 @@
         eachPoint(dataJson, paramJson);
 
         // 监听缩放事件
-        map.addEventListener("zoomend", function(e) {
+        map.addEventListener("zoomend", function() {
             var ZoomNum = map.getZoom();
             var markerClusterer;
             if (ZoomNum < 15) {
+
                 map.clearOverlays(); //一次移除所有的覆盖物(相当于清空所有标注点)(必须!)
                 // 点聚合start
                 var markers = [];
@@ -154,8 +156,6 @@
                     markers.push(marker);
 
                 });
-                // map.clearOverlays(); //清除地图覆盖物
-
 
                 // 添加点聚合效果
                 markerClusterer = new BMapLib.MarkerClusterer(map, {
@@ -164,46 +164,46 @@
                 // 点聚合end
             } else {
                 eachPoint(dataJson, paramJson);
-
             }
         })
 
     }
 
     function addClickHandler(marker, dataJson, paramJson, point, obj_option) {
-        marker.addEventListener("click", function(e) {
+        marker.addEventListener("click", function() {
 
             // 创建并弹出弹窗
-            openWinInfo(marker, e, dataJson, paramJson, point, obj_option);
+            openWinInfo(marker, dataJson, paramJson, point, obj_option);
         });
     }
     // 创建弹窗
-    function openWinInfo(marker, e, dataJson, paramJson, point, obj_option) {
+    function openWinInfo(marker, dataJson, paramJson, point, obj_option) {
         // 获取屏幕尺寸并判断是否移动端
         const isPCequipt = document.body.clientWidth > 450;
         var opts;
         if (isPCequipt) {
             opts = {
-                width: 550,
-                height: 580,
+                width: 450,
+                height: 500,
+                title: obj_option.title,
                 enableMessage: true
             };
         } else {
             opts = {
                 width: 250,
                 height: 400,
+                title: obj_option.title,
                 enableMessage: true
             };
         }
 
-        var p = e.target;
-        var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
         // 创建信息窗口对象
-        var content = '<div class="bdInfoWindow">' + '<p>' + obj_option.title + "</p>" + "<img src='./img/" + obj_option.image + "'>" + "<p>介绍：" + obj_option.detail + " </p>" + "<p>设备：" + obj_option.equipment + " 台<p/>" + "<p>人流量：" + obj_option.visitor_count + " 人次/天<p/>" + '</div>';
+        var content = '<div class="bdInfoWindow">' + "<img src='./img/" + obj_option.image + "'>" + "<p>介绍：" + obj_option.detail + " </p>" + "<p>设备：" + obj_option.equipment + " 台<p/>" + "<p>人流量：" + obj_option.visitor_count + " 人次/天<p/>" + '</div>';
         var infoWindow = new BMap.InfoWindow(content, opts);
         //开启信息窗口
         map.openInfoWindow(infoWindow, point);
     }
+
 
     function eachPoint(dataJson, paramJson) {
         map.clearOverlays(); //一次移除所有的覆盖物(相当于清空所有标注点)(必须!)
@@ -266,42 +266,48 @@
                 color: '2',
                 image: 'ygcm.png',
                 visitor_count: 20000,
-                equipment: 0
+                equipment: 0,
+                downtown: "天河区"
             }, {
                 title: "番禺海印潮楼",
                 detail: "广东省广州市番禺区兴南大道445号环境大厦",
                 yjzc_zb: "113.371537,23.022211",
                 image: 'pycl.png',
                 visitor_count: 20000,
-                equipment: 6
+                equipment: 6,
+                downtown: "番禺区"
             }, {
                 title: "广百广场（荔胜店）",
                 detail: "广州市荔湾区花地大道与龙溪大道交汇处",
                 yjzc_zb: "113.239795,23.083794",
                 image: 'ygcm.png',
                 visitor_count: 40000,
-                equipment: 8
+                equipment: 8,
+                downtown: "荔湾区"
             }, {
                 title: "城投地产花城金沙汇",
                 detail: "广州市	白云区 金沙洲路111号",
                 yjzc_zb: "113.212773,23.163642",
                 image: 'jsh.png',
                 visitor_count: 20000,
-                equipment: 15
+                equipment: 15,
+                downtown: "白云区"
             }, {
                 title: "嘉鼎创客写字楼",
                 detail: "广州市白云区彭江路168号",
                 yjzc_zb: "113.283069,23.234309",
                 image: 'ygcm.png',
                 visitor_count: 20000,
-                equipment: 1
+                equipment: 1,
+                downtown: "白云区"
             }, {
                 title: "星汇广场",
                 detail: "广州市白云区嘉禾街鹤鳌公路501号",
                 yjzc_zb: "113.279261,23.235483",
                 image: 'xhgc.png',
                 visitor_count: 30000,
-                equipment: 5
+                equipment: 5,
+                downtown: "白云区"
             }, {
                 title: "佳润广场",
                 detail: "广州市白云区广州大道北1419号",
@@ -1317,18 +1323,18 @@
             if (e.keyCode == 13) {
                 $('#btn_search_map').click();
             }
-
         });
         //=====按关键词检索
-        $('#btn_search_map').on('click', function() {
-            var keywords = $('#s_i_map').val();
-            var local = new BMap.LocalSearch(map, {
-                renderOptions: {
-                    map: map
-                }
-            });
-            local.search(keywords);
-        });
+        // $('#btn_search_map').on('click', function() {
+        // var keywords = $('#s_i_map').val();
+        // console.log('xianshi', keywords);
+        // var local = new BMap.LocalSearch(map, {
+        //     renderOptions: {
+        //         map: map
+        //     }
+        // });
+        // local.search(keywords);
+        // });
 
         function EchartsClick() {
             // Echarts的代码
@@ -1445,10 +1451,10 @@
         /*+--------------------------+*/
         //=====点位分布弹窗
         $('#btn').click(function() {
-                $('.mengban').show();
-                EchartsClick();
-            })
-            // 关闭弹窗
+            $('.mengban').show();
+            EchartsClick();
+        });
+        // 关闭弹窗
         $('.close').click(function() {
             $('.mengban').hide();
         })
@@ -1459,29 +1465,75 @@
             // 阻止事件冒泡
             e.stopPropagation();
         })
+
+        // 点击选项框切换不同内容则显示不同的点位
         $("#selector").change(function() {
-            const text = $("#selector").find("option:selected").val();
-            map.centerAndZoom(text, 16);
+                const text = $(this).find("option:selected").val();
+                const newArr = [];
+                $coordinateJson.data.forEach(function(item) {
 
-            var bdary = new BMap.Boundary();
-            bdary.get(text, function(rs) { //获取行政区域
-                map.clearOverlays(); //清除地图覆盖物
-                loadPointData($coordinateJson, {
-                    "showDetails": false
-                }); //根据json加载地图数据
-                var count = rs.boundaries.length; //行政区域的点有多少个
-                for (var i = 0; i < count; i++) {
-                    var ply = new BMap.Polygon(rs.boundaries[i], {
-                        strokeWeight: 5,
-                        strokeColor: "blue"
-                    }); //建立多边形覆盖物
-                    map.addOverlay(ply); //添加覆盖物
-                    map.setViewport(ply.getPath()); //调整视野
-                }
+                    if (item.downtown == text) {
+                        newArr.push(item);
+                    };
+                    const obj = {};
+                    obj.data = newArr;
 
-                // document.getElementById('Div1').innerText = rs.boundaries;
-                //'{"type":"Feature","id":"0","properties":{"name":"'+name+'"},"geometry":{"type":"Polygon","coordinates":[[[' + String().replace(';','],[') + ']]}}';
+                    map.clearOverlays(); //一次移除所有的覆盖物(相当于清空所有标注点)(必须!)
+                    // 重新加载地图
+                    loadPointData(obj, {
+                        "showDetails": false
+                    });
+                })
+            })
+            // 定义搜索的点位并添加标注
+        function myFun() {
+
+            var size = new BMap.Size(30, 30); //自定义的图标大小
+            var iconOptions = {
+                anchor: new BMap.Size(5, 10) //图标的定位锚点。此点用来决定图标与地理位置的关系，是相对于图标左上角的偏移值，默认等于图标宽度和高度的中间值
+            }
+            var icon = new BMap.Icon('./img/icon_locate_green.png', size, iconOptions);
+            const $iconJson = {
+                "icon": icon
+            }
+            var pp = local.getResults().getPoi(0).point; //获取第一个智能搜索的结果
+            map.centerAndZoom(pp, 18);
+            map.addOverlay(new BMap.Marker(pp, $iconJson)); //添加标注
+
+        }
+
+        var btnSearch = document.getElementById("btn_search_map");
+        btnSearch.addEventListener("click", function() { //点击搜索
+            map.clearOverlays(); //清除地图上所有覆盖物
+            local = new BMap.LocalSearch(map, { //智能搜索
+                onSearchComplete: myFun
             });
-        })
-    }); //END $(function(){});
+            local.search(document.getElementById("s_i_map").value);
+        });
+
+        // 根据不同区域描点
+        // $("#selector").change(function() {
+        //     const text = $("#selector").find("option:selected").val();
+        //     map.centerAndZoom(text, 16);
+
+        //     var bdary = new BMap.Boundary();
+        //     bdary.get(text, function(rs) { //获取行政区域
+        //         map.clearOverlays(); //清除地图覆盖物
+        //         loadPointData($coordinateJson, {
+        //             "showDetails": false
+        //         }); //根据json加载地图数据
+        //         var count = rs.boundaries.length; //行政区域的点有多少个
+        //         for (var i = 0; i < count; i++) {
+        //             var ply = new BMap.Polygon(rs.boundaries[i], {
+        //                 strokeWeight: 5,
+        //                 strokeColor: "blue"
+        //             }); //建立多边形覆盖物
+        //             map.addOverlay(ply); //添加覆盖物
+        //             map.setViewport(ply.getPath()); //调整视野
+        //         }
+
+        //     });
+        // })
+
+    });
 </script>

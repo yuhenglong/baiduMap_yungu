@@ -281,9 +281,9 @@
 	    // PC端
 	    var infoOptionsPc = {
 	            // 假如想修复BUG，就把宽度和高度设置为固定值
-	            "width": 550, //信息窗宽度(220-730) 0 自动调整
+	            "width": 450, //信息窗宽度(220-730) 0 自动调整
 	            // "maxWidth": 500, //信息窗最大宽度(220-730)
-	            "height": 580, //信息窗高度(60-650) 0 自动调整
+	            "height": 500, //信息窗高度(60-650) 0 自动调整
 	            // "offset": { width: 15, height: -10 }, //信息窗位置偏移
 	            //"enableAutoPan":true, //是否开启信息窗口打开时地图自动移动（默认开启）
 	            //"title" : title //信息窗标题文字，支持HTML内容
@@ -308,7 +308,7 @@
 	    if (isPCequipt) {
 	        // PC端
 	        var infoWindow = new BMap.InfoWindow(content, infoOptionsPc); // 创建PC端信息窗口对象 
-	        marker.addEventListener("mouseover", function() { //mouseover鼠标经过时,click鼠标点击时
+	        marker.addEventListener("click", function() { //mouseover鼠标经过时,click鼠标点击时
 	            map.openInfoWindow(infoWindow, point); //开启信息窗口
 	        });
 	    } else {
