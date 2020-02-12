@@ -231,7 +231,7 @@
 
 	    var l_opts = { //文字标签定位
 	        position: point, // 指定文本标注所在的地理位置
-	        offset: new BMap.Size(25, -25) //设置文本偏移量x,y轴
+	        offset: new BMap.Size(15, -25) //设置文本偏移量x,y轴
 	    }
 
 	    //alert(showDetails);
