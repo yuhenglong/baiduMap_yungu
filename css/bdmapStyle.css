@@ -331,6 +331,10 @@ select {
     margin-left: 10px;
 }
 
+#s_i_map:focus {
+    outline: none;
+}
+
 
 /*最小屏幕分辨率为1280px且最大为1440px*/
 
