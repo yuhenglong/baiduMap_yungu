@@ -277,7 +277,7 @@
 	        visitor_count = json.visitor_count,
 	        equipment = json.equipment;
 	    // 定义拼接弹窗内容
-	    var content = '<div class="bdInfoWindow">' + "<img src='./img/" + image + "'>" + "<p>介绍：" + description + " </p>" + "<p>设备：" + equipment + " 台<p/>" + "<p>人流量：" + visitor_count + " 人次/天<p/>" + '</div>';
+	    var content = '<div class="bdInfoWindow">' + "<img src='./img_cd/" + image + "'>" + "<p>介绍：" + description + " </p>" + "<p>设备：" + equipment + " 台<p/>" + "<p>人流量：" + visitor_count + " 人次/天<p/>" + '</div>';
 	    // PC端
 	    var infoOptionsPc = {
 	            // 假如想修复BUG，就把宽度和高度设置为固定值
