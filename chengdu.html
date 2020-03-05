@@ -180,11 +180,11 @@
     function openWinInfo(marker, dataJson, paramJson, point, obj_option) {
         // 获取屏幕尺寸并判断是否移动端
         const isPCequipt = document.body.clientWidth > 450;
-        var opts;
+        let opts;
         if (isPCequipt) {
             opts = {
                 width: 450,
-                height: 500,
+                height: 550,
                 title: obj_option.title,
                 enableMessage: true
             };
